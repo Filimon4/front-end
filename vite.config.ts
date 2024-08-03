@@ -25,6 +25,7 @@ export default defineConfig(({mode}) => {
         "@widgets": resolvePath("src/widgets"),
         "@features": resolvePath("src/features"),
         "@entities": resolvePath("src/entities"),
+        "@store": resolvePath("src/shared/store"),
       }
     },
   }

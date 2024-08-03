@@ -7,6 +7,11 @@ import '@shared/fonts/NotoSansNagMundari-Medium.ttf'
 import '@shared/fonts/NotoSansNagMundari-Regular.ttf'
 import '@shared/fonts/NotoSansNagMundari-SemiBold.ttf'
 
+import { Provider } from "react-redux";
+import { setupStore } from '@shared/lib/store/store'
+
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <App />
+  <Provider store={setupStore()}>
+    <App />
+  </Provider>
 )

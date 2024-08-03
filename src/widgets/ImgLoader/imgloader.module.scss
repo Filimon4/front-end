@@ -41,21 +41,3 @@
   background-color: variables.$background_inner_circly_loader;
   border-radius: 40px;
 }
-
-.subject_button {
-  $width_button: 16px;
-  $height_button: 16px;
-  width: $width_button;
-  height: $height_button;
-
-  position: absolute;
-  left: calc(50% - $width_button/2);
-  top: calc(50% - $height_button/2);
-  background-color: variables.$button_loader_color;
-  z-index: 10;
-  border-style: none;
-  cursor: pointer;
-}
-
-
-

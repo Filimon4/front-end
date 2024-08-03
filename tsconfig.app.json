@@ -30,6 +30,7 @@
       "@widgets/*": ["src/widgets/*"],
       "@features/*": ["src/features/*"],
       "@entities/*": ["src/entities/*"],
+      "@store/*": ["src/shared/lib/store/*"],
     },
     "baseUrl": "./"
   },

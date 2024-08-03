@@ -1,7 +1,7 @@
 
 import styles from "./dropdownunit.module.scss";
 
-const DropdownUnit = ({text, fileLink = '', callback}: {text: string, fileLink?: string, callback: (e: React.MouseEvent) => void}) => {
+const DropdownOptionUnit = ({text, fileLink = '', callback}: {text: string, fileLink?: string, callback: (e: React.MouseEvent) => void}) => {
   return (
     <div className={styles.dropdown_unit} onClick={callback}>
       {fileLink && <img src={fileLink} alt="" />}
@@ -10,4 +10,4 @@ const DropdownUnit = ({text, fileLink = '', callback}: {text: string, fileLink?:
   )
 }
 
-export default DropdownUnit
+export default DropdownOptionUnit
