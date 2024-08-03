@@ -1,0 +1,16 @@
+@import 'variables.module.scss';
+
+@mixin default-container {
+  padding-bottom: 2rem;
+};
+
+@mixin img_history_row {
+  background-color: #FFFFFF;
+  width: 100%;
+  height: 48px;
+}
+
+@mixin img_history_title_text {
+  justify-self: start;
+  align-self: center;
+}

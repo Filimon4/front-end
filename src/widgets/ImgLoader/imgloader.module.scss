@@ -1,0 +1,61 @@
+@use '@mixins' as mixins;
+@use '@variables' as variables;
+
+@mixin default-container {
+  padding-bottom: 2rem;
+};
+
+.img_loader {
+  @include default-container();
+  padding-top: 2rem;
+  width: 100%;
+}
+
+.img_loader_subject {
+  $widht_img_loader: 20.5em;
+  $height_img_loader: 9.688em;
+
+  position: relative;
+  background-color: variables.$background_img_loader;
+  height: $height_img_loader;
+  width: max($widht_img_loader, 25%);
+  border-style: dashed;
+  border-color: variables.$border_img_loader_dashed;
+  border-width: 1px;
+  border-radius: 8px;
+}
+
+.img_loader_subject::after{
+  $width_inner_circle: 32px;
+  $height_inner_circle: 32px;
+
+  content: '';
+  position: absolute;
+  left: calc(50% - $width_inner_circle/2);
+  top: calc(50% - $height_inner_circle/2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: $height_inner_circle;
+  width: $width_inner_circle;
+  background-color: variables.$background_inner_circly_loader;
+  border-radius: 40px;
+}
+
+.subject_button {
+  $width_button: 16px;
+  $height_button: 16px;
+  width: $width_button;
+  height: $height_button;
+
+  position: absolute;
+  left: calc(50% - $width_button/2);
+  top: calc(50% - $height_button/2);
+  background-color: variables.$button_loader_color;
+  z-index: 10;
+  border-style: none;
+  cursor: pointer;
+}
+
+
+

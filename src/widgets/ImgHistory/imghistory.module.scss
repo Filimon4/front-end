@@ -1,0 +1,30 @@
+@use '@mixins' as mixins;
+@use '@variables' as variables;
+
+.img_history {
+  @include mixins.default-container();
+  min-width: 500px;
+  display: flex;
+  flex-direction: column;
+}
+
+.history_menu_upper_border {
+  border-block-start-width: variables.$history_upper_border_with;
+  border-block-start-color: rgba(25,25,25,0.1);
+  border-block-start-style: solid;
+}
+
+.history_menu {
+  @include mixins.img_history_row();
+  position: relative;
+  display: inline-grid;
+  grid-template-columns: 50px 2fr 1fr 48px;
+  
+  border-block-end-width: variables.$history_upper_border_with;
+  border-block-end-color: rgba(25,25,25,0.1);
+  border-block-end-style: solid;
+}
+
+.history_title {
+  @include mixins.img_history_title_text();
+}
