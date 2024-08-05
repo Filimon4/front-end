@@ -8,28 +8,51 @@ import { TDropUnit } from '@shared/types/dropdownmenu.types';
 
 import upload_file from '@icons/upload_file.svg'
 import screen_shot from "@icons/screen_shot_link.svg"
+import { useAppDispatch } from '@shared/lib/store/hooks/reduxTypesHooks';
+import { imgHistorySlice } from '@shared/lib/store/slices/imgHistorySlice';
+import { TImgModel } from '@shared/types/imghistory.types';
+
+enum EOptionLoader {
+  'upload',
+  'screenshot'
+}
 
 const dropDownConfig: TDropUnit[] = [
   {
     img: upload_file,
     text: 'File Upload',
+    type: EOptionLoader.upload
   },
   {
     img: screen_shot,
     text: 'Take a Screen and Upload',
+    type: EOptionLoader.screenshot
   }
 ]
 
 const LoadImg = () => {
   const [openLoaderOpt, setOpenLoaderOpt] = useState<boolean>(false)
+  const dispatch = useAppDispatch()
+  const {addImg} = imgHistorySlice.actions
 
   const refClck = useClickOutside(() => {
     setOpenLoaderOpt(false);
   })
 
-  const onLodaerButtonClick = (e: React.MouseEvent) => {
+  const uploadImg = (e: React.MouseEvent) => {
     e.preventDefault()
-    console.log(e.target);
+    setOpenLoaderOpt(false);
+    console.log('uploadImg');
+    const img: Omit<TImgModel, 'id'> = {
+      name: 'TestUpload'
+    }
+    dispatch(addImg(img))
+  }
+
+  const takeScrenshot = (e: React.MouseEvent) => {
+    e.preventDefault()
+    setOpenLoaderOpt(false);
+    console.log('takeScreenshot');
   }
 
   return (
@@ -46,9 +69,15 @@ const LoadImg = () => {
       }
       > 
         <div ref={refClck as React.RefObject<HTMLDivElement>} className={styles.dropdown_container}>
-          {dropDownConfig.map((unit, indx) => (
-            <DropdownOptionUnit key={indx} fileLink={unit.img} text={unit.text} callback={onLodaerButtonClick} />
-          ))}
+          {dropDownConfig.map((unit, indx) => {
+
+            switch (unit.type) {
+              case EOptionLoader.screenshot:
+                return <DropdownOptionUnit key={indx} fileLink={unit.img} text={unit.text} callback={takeScrenshot} />
+              case EOptionLoader.upload:
+                return <DropdownOptionUnit key={indx} fileLink={unit.img} text={unit.text} callback={uploadImg} />
+            }
+          })}
         </div>
       </div>
     </>

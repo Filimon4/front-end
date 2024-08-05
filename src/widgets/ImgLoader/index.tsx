@@ -6,7 +6,6 @@ const ImgLoader = () => {
   return (
     <div className={styles.img_loader}>
       <div className={styles.img_loader_subject}>
-        
         <LoadImg/>    
       </div>
     </div>

@@ -43,9 +43,3 @@
   left: calc(50% - $width_dropdown*1.1);
   top: calc(50% + $height_dropdown/6);
 }
-
-.menu_select_active {
-  background: rgb(124,201,255);
-  background: linear-gradient(19deg, rgba(124,201,255,1) 25%, rgba(255,255,255,1) 65%);
-}
-

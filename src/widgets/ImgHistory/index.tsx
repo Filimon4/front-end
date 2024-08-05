@@ -2,28 +2,14 @@ import cn from "classnames";
 
 import styles from './imghistory.module.scss'
 
-import { IUploadedItem } from "@shared/types/imghistory.types";
 import { useState } from "react";
 import HistoryImgEntities from "@features/HistoryImgEntities";
 import { RowsTheme } from "@shared/themes/imghistorytheme";
-
-const mockEntities: Array<IUploadedItem> = [
-  {
-    name: 'SomeImg',
-    timeAdded: new Date()
-  },
-  {
-    name: 'SomeImg',
-    timeAdded: new Date()
-  },
-  {
-    name: 'SomeImg',
-    timeAdded: new Date()
-  },
-]
+import { useAppSelector } from "@shared/lib/store/hooks/reduxTypesHooks";
+import { TImgModel } from "@shared/types/imghistory.types";
 
 const ImgHistory = () => {
-  const [imgHistoryEntities] = useState<Array<IUploadedItem>>(mockEntities);
+  const {imgs} = useAppSelector(state => state.imgHistory)
   const [selectedRows, setSelectedRows] = useState<number[]>([])
 
   const setSelectRowClick = (e: React.MouseEvent, indx: number) => {
@@ -45,11 +31,11 @@ const ImgHistory = () => {
           <p className={styles.history_title}>Updated</p>
           <p />
         </div>
-        {imgHistoryEntities.map((obj, indx) => (
+        {imgs.map((obj: TImgModel, indx: number) => (
           <div key={indx} className={cn(styles.history_menu, {
             [styles.menu_select_active]: selectedRows.includes(indx+1)
           })}>
-            <HistoryImgEntities indx={indx} obj={obj} />
+            <HistoryImgEntities id={obj.id} obj={obj} />
           </div>
         ))}
       </div>
