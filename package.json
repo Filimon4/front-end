@@ -12,6 +12,8 @@
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.7",
     "@remix-run/router": "^1.18.0",
+    "@supabase/auth-ui-react": "^0.4.7",
+    "@supabase/auth-ui-shared": "^0.1.8",
     "@uppy/core": "^4.1.0",
     "@uppy/dashboard": "^4.0.2",
     "@uppy/drag-drop": "^4.0.1",

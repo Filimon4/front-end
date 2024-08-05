@@ -1,0 +1,7 @@
+@use '@variables' as variables;
+
+.auth {
+  background-color: variables.$background_app_color;
+  width: 100vw;
+  height: 100vh;
+}

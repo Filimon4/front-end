@@ -26,5 +26,3 @@ export const imgHistorySlice: Slice = createSlice({
     }
   }
 })
-
-export default imgHistorySlice.reducer;

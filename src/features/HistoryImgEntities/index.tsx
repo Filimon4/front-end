@@ -34,6 +34,7 @@ const HistoryImgEntities = ({id, obj}: {id: number, obj: TImgModel}) => {
   const {selectedRows, setSelectRowClick} = useRowsTheme()
   const [openIdRow, setOpenIdRow] = useState<number | null>(null);
   const {removeImg} = imgHistorySlice.actions
+  console.log(imgHistorySlice.reducer)
   const disptach = useAppDispatch()
 
   const refRowOptions = useClickOutside(() => {
@@ -66,7 +67,7 @@ const HistoryImgEntities = ({id, obj}: {id: number, obj: TImgModel}) => {
       <ImgEntitySelectButton indx={id+1} active={selectedRows.includes(id+1)} callback={setSelectRowClick} />
       
       <p className={styles.menu_title} >{obj.name}</p>
-      <p className={styles.menu_title} >{'some time ago'}</p>
+      <p className={styles.menu_title} >{'some time ago '}</p>
 
       <div className={styles.menu_dropdown_container}>
         <ThreeDotsButton indx={id+1} callback={onDotsRowClick} />
