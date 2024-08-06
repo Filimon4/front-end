@@ -7,11 +7,9 @@ import useClickOutside from '@shared/hooks/useClickOutside';
 import DropdownOptionUnit from '@entities/DropdownOptionUnit';
 import ThreeDotsButton from '@entities/ThreeDotsButton';
 import ImgEntitySelectButton from '@entities/ImgEntitySelectButton';
-import { useRowsTheme } from '@shared/themes/imghistorytheme';
 import { TImgModel } from '@shared/types/imghistory.types';
-import {imgHistorySlice} from '@shared/lib/store/slices/imgHistorySlice';
-import { useAppDispatch } from '@shared/lib/store/hooks/reduxTypesHooks';
-
+import { imgHistoryActions } from '@shared/lib/store/slices/imgHistorySlice';
+import { useAppDispatch, useAppSelector } from '@shared/lib/store/hooks/reduxTypesHooks';
 
 enum EOptionImg {
   'delete',
@@ -30,12 +28,11 @@ const dropDownConfig: TDropUnit[] = [
 ]
 
 const HistoryImgEntities = ({id, obj}: {id: number, obj: TImgModel}) => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const {selectedRows, setSelectRowClick} = useRowsTheme()
-  const [openIdRow, setOpenIdRow] = useState<number | null>(null);
-  const {removeImg} = imgHistorySlice.actions
-  console.log(imgHistorySlice.reducer)
+  const {imgs} = useAppSelector(state => state.imgHistory)
+  const { selectRow, removeImg } = imgHistoryActions
   const disptach = useAppDispatch()
+
+  const [openIdRow, setOpenIdRow] = useState<number | null>(null);
 
   const refRowOptions = useClickOutside(() => {
     setOpenIdRow(null)
@@ -46,33 +43,38 @@ const HistoryImgEntities = ({id, obj}: {id: number, obj: TImgModel}) => {
     setOpenIdRow(indx)
   }
 
-  const openImgInNewTab = (e: React.MouseEvent) => {
+  const openImgInNewTab = (e: React.MouseEvent, indx: number) => {
     e.preventDefault()
     setOpenIdRow(null);
-    console.log('openImgInNewTab')
   }
 
-  const deleteImg = (e: React.MouseEvent) => {
+  const deleteImg = (e: React.MouseEvent, indx: number) => {
     e.preventDefault()
     setOpenIdRow(null);
-    const el = e.target as HTMLElement
-    const elId = el.getAttribute('unit-id')
-    console.log(elId)
-    disptach(removeImg(elId))
-    console.log('delete');
+    console.log(indx)
+    disptach(removeImg(indx))
+  }
+
+  const setSelectRowClick = (e: React.MouseEvent, indx: number) => {
+    e.preventDefault()
+    if (imgs.find(row => row.id == indx)?.selected) {
+      disptach(selectRow({id: indx, selectState: false}))
+    } else {
+      disptach(selectRow({id: indx, selectState: true}))
+    }
   }
 
   return (
     <>
-      <ImgEntitySelectButton indx={id+1} active={selectedRows.includes(id+1)} callback={setSelectRowClick} />
+      <ImgEntitySelectButton indx={id} active={imgs.find(row => row.id == id)?.selected ?? false} callback={setSelectRowClick} />
       
       <p className={styles.menu_title} >{obj.name}</p>
       <p className={styles.menu_title} >{'some time ago '}</p>
 
       <div className={styles.menu_dropdown_container}>
-        <ThreeDotsButton indx={id+1} callback={onDotsRowClick} />
+        <ThreeDotsButton indx={id} callback={onDotsRowClick} />
         <div className={
-          openIdRow==id+1 ?
+          openIdRow==id ?
           styles.dropdown_active :
           styles.dropdown_hide
         } >

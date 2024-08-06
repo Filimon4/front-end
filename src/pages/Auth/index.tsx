@@ -6,7 +6,9 @@ import styles from './auth.module.scss'
 const Auth = () => {
   return (
     <main className={styles.auth}>
-      <Outlet />
+      <div className={styles.auth_container}>
+        <Outlet />
+      </div>
     </main>
   )
 }

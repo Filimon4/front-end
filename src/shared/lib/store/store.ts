@@ -1,15 +1,11 @@
 import { combineReducers, configureStore, Store } from "@reduxjs/toolkit";
-import { imgHistorySlice } from "./slices/imgHistorySlice.ts";
+import { imgHistoryReducers, imgHistorySlice } from "./slices/imgHistorySlice.ts";
 import { puppeteerApi } from "../queryApi/puppeteerApi.ts";
 
 const rootReducers = combineReducers({
-  [imgHistorySlice.name]: imgHistorySlice.reducer,
+  [imgHistorySlice.name]: imgHistoryReducers,
   [puppeteerApi.reducerPath]: puppeteerApi.reducer
 })
-
-export const actions = {
-  
-} 
 
 export const setupStore = (): Store => {
   return configureStore({

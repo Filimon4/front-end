@@ -6,7 +6,6 @@ import ImgView from "@pages/ImgView";
 import NotFound from "@pages/NotFound";
 import Auth from "@pages/Auth";
 import Login from "@pages/Auth/Login";
-import Logout from "@pages/Auth/Logout";
 import Registartion from "@pages/Auth/Registration";
 
 export const ROUTER_MAP: Router = createBrowserRouter([
@@ -29,10 +28,6 @@ export const ROUTER_MAP: Router = createBrowserRouter([
       {
         path: 'login',
         element: <Login />
-      },
-      {
-        path: 'logout',
-        element: <Logout />
       },
       {
         path: 'registration',

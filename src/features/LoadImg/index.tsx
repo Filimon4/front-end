@@ -9,7 +9,7 @@ import { TDropUnit } from '@shared/types/dropdownmenu.types';
 import upload_file from '@icons/upload_file.svg'
 import screen_shot from "@icons/screen_shot_link.svg"
 import { useAppDispatch } from '@shared/lib/store/hooks/reduxTypesHooks';
-import { imgHistorySlice } from '@shared/lib/store/slices/imgHistorySlice';
+import { imgHistoryActions } from '@shared/lib/store/slices/imgHistorySlice';
 import { TImgModel } from '@shared/types/imghistory.types';
 
 enum EOptionLoader {
@@ -33,7 +33,7 @@ const dropDownConfig: TDropUnit[] = [
 const LoadImg = () => {
   const [openLoaderOpt, setOpenLoaderOpt] = useState<boolean>(false)
   const dispatch = useAppDispatch()
-  const {addImg} = imgHistorySlice.actions
+  const {addImg} = imgHistoryActions
 
   const refClck = useClickOutside(() => {
     setOpenLoaderOpt(false);
@@ -42,9 +42,9 @@ const LoadImg = () => {
   const uploadImg = (e: React.MouseEvent) => {
     e.preventDefault()
     setOpenLoaderOpt(false);
-    console.log('uploadImg');
     const img: Omit<TImgModel, 'id'> = {
-      name: 'TestUpload'
+      name: 'TestUpload',
+      selected: false,
     }
     dispatch(addImg(img))
   }
@@ -52,7 +52,6 @@ const LoadImg = () => {
   const takeScrenshot = (e: React.MouseEvent) => {
     e.preventDefault()
     setOpenLoaderOpt(false);
-    console.log('takeScreenshot');
   }
 
   return (
