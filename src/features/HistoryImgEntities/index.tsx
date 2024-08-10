@@ -4,12 +4,13 @@ import styles from "./historyrowunit.module.scss";
 import { TDropUnit } from '@shared/types/dropdownmenu.types';
 import useClickOutside from '@shared/hooks/useClickOutside';
 
-import DropdownOptionUnit from '@entities/DropdownOptionUnit';
+import DropdownOptionUnit from '@entities/DropdownOptionUnit/LinkUnit/DropdownLinkUnit';
 import ThreeDotsButton from '@entities/ThreeDotsButton';
 import ImgEntitySelectButton from '@entities/ImgEntitySelectButton';
 import { TImgModel } from '@shared/types/imghistory.types';
 import { imgHistoryActions } from '@shared/lib/store/slices/imgHistorySlice';
 import { useAppDispatch, useAppSelector } from '@shared/lib/store/hooks/reduxTypesHooks';
+import DropdownLinkUnit from '@entities/DropdownOptionUnit/LinkUnit/DropdownLinkUnit';
 
 enum EOptionImg {
   'delete',
@@ -81,14 +82,12 @@ const HistoryImgEntities = ({id, obj}: {id: number, obj: TImgModel}) => {
         } >
           <div ref={refRowOptions as React.RefObject<HTMLDivElement>}>
             {dropDownConfig.map((obj, indx) => {
-              
               switch (obj.type) {
                 case EOptionImg.delete:
-                  return <DropdownOptionUnit text={obj.text} key={indx} callback={deleteImg} id={id} />
+                  return <DropdownLinkUnit text={obj.text} key={indx} callback={deleteImg} id={id} />
                 case EOptionImg.openInNewTab:
-                  return <DropdownOptionUnit text={obj.text} key={indx} callback={openImgInNewTab} id={id} />
+                  return <DropdownLinkUnit text={obj.text} key={indx} callback={openImgInNewTab} id={id} />
               }
-
             })}
           </div>
         </div>

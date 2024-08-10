@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import cn from 'classnames';
 
 import { authApi } from '@shared/lib/queryApi/authApi';
 import useCookies from '@shared/hooks/useCookies';
@@ -9,8 +8,8 @@ import styles from './profile.module.scss'
 import arrow_up from '@icons/arrow-up-solid.svg'
 import { TDropUnit } from '@shared/types/dropdownmenu.types';
 import useClickOutside from '@shared/hooks/useClickOutside';
-import DropdownOptionUnit from '@entities/DropdownOptionUnit';
 import { useNavigate } from 'react-router-dom';
+import DropdownLinkUnit from '@entities/DropdownOptionUnit/LinkUnit/DropdownLinkUnit';
 
 enum EProfile {
   "profile",
@@ -69,9 +68,9 @@ const Profile = () => {
             {dropDownConfig.map((unit, indx) => {
               switch (unit.type) {
                 case EProfile.profile:
-                  return <DropdownOptionUnit key={indx} text={unit.text} callback={openProfile} id={indx} />
+                  return <DropdownLinkUnit key={indx} text={unit.text} callback={openProfile} id={indx} />
                 case EProfile.signout:
-                  return <DropdownOptionUnit key={indx} text={unit.text} callback={setSignOut} id={indx}/>
+                  return <DropdownLinkUnit key={indx} text={unit.text} callback={setSignOut} id={indx} />
               } 
             })}
           </div>
