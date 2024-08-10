@@ -7,6 +7,7 @@ import NotFound from "@pages/NotFound";
 import Auth from "@pages/Auth";
 import Login from "@pages/Auth/Login";
 import Registartion from "@pages/Auth/Registration";
+import UserProfile from "@pages/UserProfile";
 
 export const ROUTER_MAP: Router = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ export const ROUTER_MAP: Router = createBrowserRouter([
         element: <Registartion />
       }
     ]
+  },
+  {
+    path: "profile",
+    element: <UserProfile />
   },
   {
     path: "*",

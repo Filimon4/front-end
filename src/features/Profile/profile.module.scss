@@ -1,0 +1,46 @@
+@use '@variables' as variables;
+
+.profile {
+  position: relative;
+  display: flex;
+  height: 100%;
+  align-items: center;
+  gap: 10px;
+}
+
+.profile_logo {
+  text-decoration: none;
+  color: black;
+}
+
+.prfile_units {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.dropdown_profile_hiden {
+  display: none;
+}
+
+.dropdown_profile_active {
+  $width_dropdown: 226px;
+  $height_dropdown: 97px;
+  width: $width_dropdown;
+  height: $height_dropdown;
+
+  position: absolute;
+
+  z-index: 10;
+  background-color: variables.$background_img_loader;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+
+  left: calc(50% - $width_dropdown/1.4);
+  top: calc(50% + $height_dropdown/4);
+}
+
+.dropdown_arrow_down {
+  transform: rotate(180deg);
+}

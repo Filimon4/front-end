@@ -10,10 +10,11 @@ export interface RegitrTarget extends EventTarget {
   rep_password: HTMLInputElement;
 }
 
+// TODO: Обработка ошибок, что не перезагружать страницу при неправильной отправке
 const AuthRegistrForm = () => {
   // const [update, result] = api.useSetRegistrationMutation()\
   const navigator = useNavigate()
-  const [registerPost, {data, isError, isLoading, isSuccess, isUninitialized, reset}] = authApi.useSetRegistrationMutation({})
+  const [registerPost, {data, isError, isLoading, isSuccess, isUninitialized, reset}] = authApi.useSetRegistrationMutation()
 
   useEffect(() => {
     console.log(data)

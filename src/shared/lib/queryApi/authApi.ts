@@ -16,7 +16,8 @@ export const authApi = createApi({
     }),
     setRegistration: builder.mutation({
       query: (user) => ({
-        url: '/reqistration',
+        url: '/signup',
+        method: "POST",
         body: {
           username: user.username,
           password: user.password,
@@ -26,6 +27,7 @@ export const authApi = createApi({
     getRefresh: builder.query({
       query: (token: string) => ({
         url: '/refresh',
+        methos: "GET",
         body: {
           accesstoken: token
         }

@@ -11,6 +11,7 @@ export interface LoginTarget extends EventTarget {
 }
 
 // TODO: Добавить http-only и переделать афторизацию
+// TODO: Обработка ошибок, что не перезагружать страницу при неправильной отправке
 const AuthLoginForm = () => {
   const navtigator = useNavigate()
   const [loginPost, {data, isError, isLoading, isSuccess, isUninitialized, reset}] = authApi.useSetLoginMutation()
@@ -26,7 +27,6 @@ const AuthLoginForm = () => {
   const onSubmitAuth = (e: React.FormEvent) => {
     e.preventDefault()
     const {username, password} = e.target as LoginTarget
-    console.log(username.value, password.value)
     if (isUninitialized) {
       loginPost({username: username.value, password: password.value})
     }

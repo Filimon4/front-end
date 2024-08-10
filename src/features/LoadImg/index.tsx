@@ -30,6 +30,8 @@ const dropDownConfig: TDropUnit[] = [
   }
 ]
 
+// TODO при нажатии на квадрат меня на крестик и отбратно
+
 const LoadImg = () => {
   const [openLoaderOpt, setOpenLoaderOpt] = useState<boolean>(false)
   const dispatch = useAppDispatch()

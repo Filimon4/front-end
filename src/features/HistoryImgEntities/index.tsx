@@ -27,6 +27,7 @@ const dropDownConfig: TDropUnit[] = [
   }
 ]
 
+// TODO: При нажатии на 3 точки менять на крестик и обратно
 const HistoryImgEntities = ({id, obj}: {id: number, obj: TImgModel}) => {
   const {imgs} = useAppSelector(state => state.imgHistory)
   const { selectRow, removeImg } = imgHistoryActions
