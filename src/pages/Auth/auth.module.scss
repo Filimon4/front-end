@@ -1,7 +1,10 @@
 @use '@variables' as variables;
 
 .auth {
-  background-color: variables.$background_app_color;
+  background-image: url('../../../public/img/auth/devyatiy_val_full_hd.png');
+  background-size: cover;
+  background-repeat: none;
+  background-position: center;
   width: 100vw;
   height: 100vh;
 }

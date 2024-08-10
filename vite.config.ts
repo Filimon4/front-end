@@ -27,6 +27,7 @@ export default defineConfig(({mode}) => {
         "@entities": resolvePath("src/entities"),
         "@store": resolvePath("src/shared/store"),
         "@pages": resolvePath("src/pages"),
+        "@public": resolvePath("public"),
       }
     },
   }

@@ -1,0 +1,16 @@
+@use "@variables" as variables;
+@use "@mixins" as mixins;
+
+.navbar {
+  background-color: white;
+  height: 4rem;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-inline: 3rem;
+}
+
+.navbar_absolute {
+  position: absolute;
+}

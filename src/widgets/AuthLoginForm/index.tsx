@@ -1,18 +1,35 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 import styles from "./auhtloginform.module.scss";
+import { useNavigate } from 'react-router-dom';
+import { authApi } from '@shared/lib/queryApi/authApi';
+import useCookies from '@shared/hooks/useCookies';
 
 export interface LoginTarget extends EventTarget {
   username: HTMLInputElement;
   password: HTMLInputElement;
 }
 
+// TODO: Добавить http-only и переделать афторизацию
 const AuthLoginForm = () => {
+  const navtigator = useNavigate()
+  const [loginPost, {data, isError, isLoading, isSuccess, isUninitialized, reset}] = authApi.useSetLoginMutation()
+  const {addCookies} = useCookies()
+
+  useEffect(() => {
+    if (!isUninitialized && isSuccess && data) {
+      addCookies('access_token', data.access_token, {path: ''})
+      navtigator('/app');
+    }
+  }, [isUninitialized, isSuccess, data])
 
   const onSubmitAuth = (e: React.FormEvent) => {
     e.preventDefault()
     const {username, password} = e.target as LoginTarget
     console.log(username.value, password.value)
+    if (isUninitialized) {
+      loginPost({username: username.value, password: password.value})
+    }
   }
 
   return (

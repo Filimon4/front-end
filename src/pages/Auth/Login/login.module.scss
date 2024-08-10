@@ -15,14 +15,14 @@
   }
 }
 
-.login::after {
-  content: '';
-  position: absolute;
-  width: max(45%, 400px);
-  height: max(50%, 450px);
-  background: variables.$background_glass_collor;
-  border-radius: 16px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(5.7px);
-  -webkit-backdrop-filter: blur(5.7px);
-}
+// .login::after {
+//   content: '';
+//   position: absolute;
+//   width: max(45%, 400px);
+//   height: max(50%, 450px);
+//   background: variables.$background_glass_collor;
+//   border-radius: 16px;
+//   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+//   backdrop-filter: blur(5.7px);
+//   -webkit-backdrop-filter: blur(5.7px);
+// }

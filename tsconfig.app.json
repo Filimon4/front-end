@@ -32,6 +32,7 @@
       "@entities/*": ["src/entities/*"],
       "@store/*": ["src/shared/lib/store/*"],
       "@pages/*": ["src/pages/*"],
+      "@public/*": ["public/*"],
     },
     "baseUrl": "./"
   },
