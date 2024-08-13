@@ -6,7 +6,7 @@ export type TDropdornInputUnit = {
   text: string,
   inputType: HTMLInputTypeAttribute,
   fileLink?: string,
-  callback: (file: File, id: number) => void,
+  callback: (file: FileList, id: number) => void,
   id?: number,
   inputRef: React.RefObject<HTMLInputElement>
 }
@@ -28,8 +28,8 @@ const DropdownInputUnit = ({
 
   const onImgChange = () => {
     //@ts-ignore
-    if (inputRef.current?.files.length > 0 && inputRef.current?.files[0]) {
-      callback(inputRef.current?.files[0], id!)
+    if (inputRef.current?.files.length > 0 && inputRef.current?.files) {
+      callback(inputRef.current?.files, id!)
     }
   }
 
@@ -37,7 +37,7 @@ const DropdownInputUnit = ({
     <div className={styles.dropdown_unit} onClick={onClick}>
       {fileLink && <img src={fileLink} alt="" />}
       <label id='fileinput'>{text}</label>
-      <input ref={inputRef} id='files' type={inputType} onChange={onImgChange} style={{display: 'none'}}/>
+      <input ref={inputRef} id='files' type={inputType} multiple onChange={onImgChange} accept='image/png, image/jpeg' style={{display: 'none'}}/>
     </div>
   )
 }

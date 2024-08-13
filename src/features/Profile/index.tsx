@@ -35,7 +35,6 @@ const Profile = () => {
   const [openProfOpt, setOpenProfOpt] = useState<boolean>(false)
 
   const refClck = useClickOutside(() => {
-    console.log('click')
     setOpenProfOpt(false);
   })
 

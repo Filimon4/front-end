@@ -2,6 +2,7 @@ import { RefObject, useEffect, useRef } from 'react'
 
 type UseOutsideClickHook = (onOutsideClick: () => void) => RefObject<HTMLElement>;
 
+//TODO: Добавить исключение на кнопку открытия/закрытия
 const useClickOutside: UseOutsideClickHook = (callbackOutside) => {
   const ref = useRef<HTMLElement>(null);
   

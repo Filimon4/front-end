@@ -12,6 +12,8 @@ import { imgHistoryActions } from '@shared/lib/store/slices/imgHistorySlice';
 import { TImgModel } from '@shared/types/imghistory.types';
 import DropdownInputUnit from '@entities/DropdownOptionUnit/InputUnit/DropdownInputUnit';
 import DropdownLinkUnit from '@entities/DropdownOptionUnit/LinkUnit/DropdownLinkUnit';
+import { useInputFileContext } from '@shared/context/InputFileContext';
+import { useSelectedFilesContext } from '@shared/context/SelectedFilesContext';
 
 enum EOptionLoader {
   'upload',
@@ -33,25 +35,25 @@ const dropDownConfig: TDropUnit[] = [
 
 // TODO при нажатии на квадрат меня на крестик и отбратно
 
-const LoadImg = () => {
-  const refInputFile = useRef<HTMLInputElement>(null)
+const LoadImg = ({ maxFileSizeInMb}: { maxFileSizeInMb: number}) => {
+  const refInputFile = useInputFileContext()
+  const {files, setFiles: setSelectedFiles} = useSelectedFilesContext()
   const [openLoaderOpt, setOpenLoaderOpt] = useState<boolean>(false)
   const dispatch = useAppDispatch()
-  const {addImg} = imgHistoryActions
+  // const { addImg } = imgHistoryActions
 
   const refClck = useClickOutside(() => {
     setOpenLoaderOpt(false);
   })
 
-  const uploadImg = (file: File, id: number) => {
-    console.log(file)
+  const uploadImg = (file: FileList, id: number) => {
     setOpenLoaderOpt(false)
-    console.log('click input file');
-    const img: Omit<TImgModel, 'id'> = {
-      name: 'TestUpload',
-      selected: false,
+    const filesFromList: File[] = []
+    for (let i = 0; i < file.length; ++i) {
+      filesFromList.push(file[i])
     }
-    dispatch(addImg(img))
+    setSelectedFiles(files => [...files, ...filesFromList])
+    setOpenLoaderOpt(false)
   }
 
   const takeScrenshot = (e: React.MouseEvent) => {
@@ -59,7 +61,7 @@ const LoadImg = () => {
   }
 
   return (
-    <>
+    <div>
       <button 
         className={styles.subject_button}
         onClick={() => setOpenLoaderOpt(!openLoaderOpt)}
@@ -83,7 +85,7 @@ const LoadImg = () => {
           })}
         </div>
       </div>
-    </>
+    </div>
   )
 }
 
