@@ -4,14 +4,39 @@ import styles from "./auhtloginform.module.scss";
 import { useNavigate } from 'react-router-dom';
 import { authApi } from '@shared/lib/queryApi/authApi';
 import useCookies from '@shared/hooks/useCookies';
+import LoginForm from '@features/LoginForm';
 
 export interface LoginTarget extends EventTarget {
   username: HTMLInputElement;
   password: HTMLInputElement;
 }
 
+export interface ILoginForm {
+  label: string,
+  input: {
+    type: string,
+    name: string
+  }
+}
+
+const configLoginForm: ILoginForm[] = [
+  {
+    label: "Username",
+    input: {
+      type: "text",
+      name: "username"
+    }
+  },
+  {
+    label: "Password",
+    input: {
+      type: "text",
+      name: "password"
+    }
+  }
+]
+
 // TODO: Добавить http-only и переделать афторизацию
-// TODO: Обработка ошибок, что не перезагружать страницу при неправильной отправке
 const AuthLoginForm = () => {
   const navtigator = useNavigate()
   const [loginPost, {data, isError, isLoading, isSuccess, isUninitialized, reset}] = authApi.useSetLoginMutation()
@@ -27,19 +52,16 @@ const AuthLoginForm = () => {
   const onSubmitAuth = (e: React.FormEvent) => {
     e.preventDefault()
     const {username, password} = e.target as LoginTarget
-    if (isUninitialized) {
+    if (!isLoading && !isSuccess) {
       loginPost({username: username.value, password: password.value})
     }
   }
 
   return (
-    <form onSubmit={onSubmitAuth} className={styles.login_form}>
-      <label>Username</label>
-      <input type="text" name='username' />
-      <label>Password</label>
-      <input type="text" name='password' />
-      <button type='submit'>Log in</button>
-    </form>
+    <>
+      <h1>Login</h1>
+      <LoginForm onSubmit={onSubmitAuth} config={configLoginForm} />
+    </>
   )
 }
 

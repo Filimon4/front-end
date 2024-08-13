@@ -10,8 +10,8 @@ import screen_shot from "@icons/screen_shot_link.svg"
 import { useAppDispatch } from '@shared/lib/store/hooks/reduxTypesHooks';
 import { imgHistoryActions } from '@shared/lib/store/slices/imgHistorySlice';
 import { TImgModel } from '@shared/types/imghistory.types';
-import DropdownInputUnit from '@entities/DropdownOptionUnit/InputUnit/DropdownInputUnit';
-import DropdownLinkUnit from '@entities/DropdownOptionUnit/LinkUnit/DropdownLinkUnit';
+import DropdownInputUnit from '@entities/Dropdown/InputUnit/DropdownInputUnit';
+import DropdownLinkUnit from '@entities/Dropdown/LinkUnit/DropdownLinkUnit';
 import { useInputFileContext } from '@shared/context/InputFileContext';
 import { useSelectedFilesContext } from '@shared/context/SelectedFilesContext';
 

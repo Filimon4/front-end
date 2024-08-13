@@ -9,7 +9,7 @@ import arrow_up from '@icons/arrow-up-solid.svg'
 import { TDropUnit } from '@shared/types/dropdownmenu.types';
 import useClickOutside from '@shared/hooks/useClickOutside';
 import { useNavigate } from 'react-router-dom';
-import DropdownLinkUnit from '@entities/DropdownOptionUnit/LinkUnit/DropdownLinkUnit';
+import DropdownLinkUnit from '@entities/Dropdown/LinkUnit/DropdownLinkUnit';
 
 enum EProfile {
   "profile",

@@ -1,16 +1,15 @@
 import React, { useState } from 'react'
-import styles from "./historyrowunit.module.scss";
+import styles from "./HistoryImgEntity.module.scss";
 
 import { TDropUnit } from '@shared/types/dropdownmenu.types';
 import useClickOutside from '@shared/hooks/useClickOutside';
 
-import DropdownOptionUnit from '@entities/DropdownOptionUnit/LinkUnit/DropdownLinkUnit';
-import ThreeDotsButton from '@entities/ThreeDotsButton';
-import ImgEntitySelectButton from '@entities/ImgEntitySelectButton';
+import ThreeDotsButton from '@entities/Buttons/ThreeDotsButton';
+import ImgEntitySelectButton from '@entities/Buttons/ImgEntitySelectButton';
 import { TImgModel } from '@shared/types/imghistory.types';
 import { imgHistoryActions } from '@shared/lib/store/slices/imgHistorySlice';
 import { useAppDispatch, useAppSelector } from '@shared/lib/store/hooks/reduxTypesHooks';
-import DropdownLinkUnit from '@entities/DropdownOptionUnit/LinkUnit/DropdownLinkUnit';
+import DropdownLinkUnit from '@entities/Dropdown/LinkUnit/DropdownLinkUnit';
 
 enum EOptionImg {
   'delete',

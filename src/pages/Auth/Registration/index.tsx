@@ -5,8 +5,7 @@ import AuthRegistrForm from '@widgets/AuthRegistrForm'
 
 const Registartion = () => {
   return (
-    <div className={styles.login}>
-      <h1>Registration</h1>
+    <div className={styles.registration}>
       <AuthRegistrForm />
     </div>
   )
