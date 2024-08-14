@@ -7,13 +7,12 @@ import { TDropUnit } from '@shared/types/dropdownmenu.types';
 
 import upload_file from '@icons/upload_file.svg'
 import screen_shot from "@icons/screen_shot_link.svg"
-import { useAppDispatch } from '@shared/lib/store/hooks/reduxTypesHooks';
+import { useAppDispatch, useAppSelector } from '@shared/lib/store/hooks/reduxTypesHooks';
 import { imgHistoryActions } from '@shared/lib/store/slices/imgHistorySlice';
 import { TImgModel } from '@shared/types/imghistory.types';
 import DropdownInputUnit from '@entities/Dropdown/InputUnit/DropdownInputUnit';
 import DropdownLinkUnit from '@entities/Dropdown/LinkUnit/DropdownLinkUnit';
-import { useInputFileContext } from '@shared/context/InputFileContext';
-import { useSelectedFilesContext } from '@shared/context/SelectedFilesContext';
+import { imgSelectedActions } from '@shared/lib/store/slices/ImgSelectedSlice';
 
 enum EOptionLoader {
   'upload',
@@ -33,13 +32,14 @@ const dropDownConfig: TDropUnit[] = [
   }
 ]
 
-// TODO при нажатии на квадрат меня на крестик и отбратно
 
-const LoadImg = ({ maxFileSizeInMb}: { maxFileSizeInMb: number}) => {
-  const refInputFile = useInputFileContext()
-  const {files, setFiles: setSelectedFiles} = useSelectedFilesContext()
+// TODO при нажатии на квадрат (заменить на плюс) меня на крестик и отбратно
+// TODO при навидении на юниты выподающего окна сбиваются border-radius когда есть изображения
+const LoadImg = () => {
+  // const {loadedImgs} = useAppSelector(state => state.imgSelected)
   const [openLoaderOpt, setOpenLoaderOpt] = useState<boolean>(false)
   const dispatch = useAppDispatch()
+  const {addLoadedImgs} = imgSelectedActions
   // const { addImg } = imgHistoryActions
 
   const refClck = useClickOutside(() => {
@@ -47,12 +47,11 @@ const LoadImg = ({ maxFileSizeInMb}: { maxFileSizeInMb: number}) => {
   })
 
   const uploadImg = (file: FileList, id: number) => {
-    setOpenLoaderOpt(false)
     const filesFromList: File[] = []
     for (let i = 0; i < file.length; ++i) {
       filesFromList.push(file[i])
     }
-    setSelectedFiles(files => [...files, ...filesFromList])
+    dispatch(addLoadedImgs(filesFromList))
     setOpenLoaderOpt(false)
   }
 
@@ -78,7 +77,7 @@ const LoadImg = ({ maxFileSizeInMb}: { maxFileSizeInMb: number}) => {
 
             switch (unit.type) {
               case EOptionLoader.upload:
-                return <DropdownInputUnit key={indx} fileLink={unit.img} text={unit.text} callback={uploadImg} inputType='file' inputRef={refInputFile} />
+                return <DropdownInputUnit key={indx} fileLink={unit.img} text={unit.text} callback={uploadImg} inputType='file' />
               case EOptionLoader.screenshot:
                 return <DropdownLinkUnit key={indx} fileLink={unit.img} text={unit.text} callback={takeScrenshot}/>
             }

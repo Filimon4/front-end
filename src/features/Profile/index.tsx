@@ -27,6 +27,7 @@ const dropDownConfig: TDropUnit[] = [
   }
 ]
 
+// TODO: Сделать номрмальную кновпу signin
 const Profile = () => {
   const navigator = useNavigate()
   const {getCookies, deleteCookies} = useCookies()

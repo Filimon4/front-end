@@ -8,7 +8,6 @@ export type TDropdornInputUnit = {
   fileLink?: string,
   callback: (file: FileList, id: number) => void,
   id?: number,
-  inputRef: React.RefObject<HTMLInputElement>
 }
 
 const DropdownInputUnit = ({
@@ -17,9 +16,8 @@ const DropdownInputUnit = ({
   fileLink = '',
   callback,
   id,
-  inputRef
 }: TDropdornInputUnit) => {
-
+  const inputRef = useRef<HTMLInputElement>(null)
 
   const onClick = (e: React.MouseEvent) => {
     inputRef.current?.click()

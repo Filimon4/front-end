@@ -6,6 +6,4 @@ export type TImgModel = {
 
 export interface IImgHistory {
   imgs: TImgModel[]
-  isLoading: boolean,
-  error: string,
 }
