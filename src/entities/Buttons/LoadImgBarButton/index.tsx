@@ -3,44 +3,28 @@ import useClickOutside from '@shared/hooks/useClickOutside'
 
 import styles from "./dropdownmenu.module.scss";
 
+import plus from "@icons/plus.svg"
+
 import { TDropUnit } from '@shared/types/dropdownmenu.types';
 
-import upload_file from '@icons/upload_file.svg'
-import screen_shot from "@icons/screen_shot_link.svg"
 import { useAppDispatch, useAppSelector } from '@shared/lib/store/hooks/reduxTypesHooks';
-import { imgHistoryActions } from '@shared/lib/store/slices/imgHistorySlice';
-import { TImgModel } from '@shared/types/imghistory.types';
 import DropdownInputUnit from '@entities/Dropdown/InputUnit/DropdownInputUnit';
 import DropdownLinkUnit from '@entities/Dropdown/LinkUnit/DropdownLinkUnit';
 import { imgSelectedActions } from '@shared/lib/store/slices/ImgSelectedSlice';
-
-enum EOptionLoader {
-  'upload',
-  'screenshot'
-}
-
-const dropDownConfig: TDropUnit[] = [
-  {
-    img: upload_file,
-    text: 'File Upload',
-    type: EOptionLoader.upload
-  },
-  {
-    img: screen_shot,
-    text: 'Take a Screen and Upload',
-    type: EOptionLoader.screenshot
-  }
-]
+import { EOptionLoader } from '@features/ImgLoaderBar';
 
 
-// TODO при нажатии на квадрат (заменить на плюс) меня на крестик и отбратно
+// TODO при нажатии разворячивать на 45
 // TODO при навидении на юниты выподающего окна сбиваются border-radius когда есть изображения
-const LoadImg = () => {
-  // const {loadedImgs} = useAppSelector(state => state.imgSelected)
+const   LoadImgBar = ({
+  config,
+}: {
+  config: TDropUnit[],
+}) => {
+  const {selectedImgs} = useAppSelector(state => state.imgSelected)
   const [openLoaderOpt, setOpenLoaderOpt] = useState<boolean>(false)
   const dispatch = useAppDispatch()
-  const {addLoadedImgs} = imgSelectedActions
-  // const { addImg } = imgHistoryActions
+  const {addLoadedImgs, removeSelectedImg} = imgSelectedActions
 
   const refClck = useClickOutside(() => {
     setOpenLoaderOpt(false);
@@ -52,6 +36,7 @@ const LoadImg = () => {
       filesFromList.push(file[i])
     }
     dispatch(addLoadedImgs(filesFromList))
+    dispatch(removeSelectedImg(selectedImgs))
     setOpenLoaderOpt(false)
   }
 
@@ -59,13 +44,19 @@ const LoadImg = () => {
     setOpenLoaderOpt(false);
   }
 
+  const onClickLoader = () => {
+    setOpenLoaderOpt(!openLoaderOpt)
+  }
+
   return (
-    <div>
+    <div className={styles.load_img_button}>
       <button 
         className={styles.subject_button}
-        onClick={() => setOpenLoaderOpt(!openLoaderOpt)}
-        />
-      {/* Dropdown menu to features */}
+        onClick={onClickLoader}
+      >
+        <img className={styles.button_img} src={plus} alt="Plus" width={20} height={20} />
+      </button>
+    
       <div className={
         openLoaderOpt?
         styles.dropdown_active:
@@ -73,7 +64,7 @@ const LoadImg = () => {
       }
       > 
         <div ref={refClck as React.RefObject<HTMLDivElement>} className={styles.dropdown_container}>
-          {dropDownConfig.map((unit, indx) => {
+          {config.map((unit, indx) => {
 
             switch (unit.type) {
               case EOptionLoader.upload:
@@ -88,4 +79,4 @@ const LoadImg = () => {
   )
 }
 
-export default LoadImg
+export default LoadImgBar

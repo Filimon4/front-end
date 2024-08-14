@@ -7,21 +7,7 @@ $background_button_submit: #8aa6b985;
   flex-direction: column;
   align-items: start;
   width: max(75%, 350px);
-
-  label {
-    padding-block: 10px;
-    font-size: 1.1rem;
-    margin-top: 7px;
-    color: white;
-  }
-
-  input {
-    padding: 8px;
-    width: max(150px, 100%);
-    border: none;
-    outline: none;
-    border-radius: 10px;
-  }
+  gap: 10px;
   
   button {
     cursor: pointer;
@@ -38,5 +24,27 @@ $background_button_submit: #8aa6b985;
     &:hover {
       background: rgba(7, 143, 255, 0.363);
     }
+  }
+}
+
+.form_unit {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  label {
+    padding-block: 10px;
+    font-size: 1.1rem;
+    margin-top: 7px;
+    color: white;
+  }
+
+  input {
+    padding: 8px;
+    width: max(150px, 100%);
+    border: none;
+    outline: none;
+    border-radius: 10px;
   }
 }

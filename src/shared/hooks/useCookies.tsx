@@ -15,8 +15,9 @@ const useCookies = () => {
   }
   const getCookies: TGetCookies = (name) => {
     const allCookies: Array<string> = document.cookie.split(';')
+    console.log(document.cookie)
     const rawCookies: Array<string> = allCookies.flatMap(cook => cook.split('='))
-    const findCookieIndex = rawCookies.findIndex(cook => cook.split('=')[0] == name)
+    const findCookieIndex = rawCookies.findIndex(cook => cook.split('=')[0].trim() == name)
     return rawCookies[(findCookieIndex+1)] ?? null
   }
   return {getCookies, addCookies, deleteCookies}

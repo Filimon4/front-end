@@ -1,0 +1,22 @@
+$size: 32px;
+$img_size: 19px;
+
+.rubbish_bin {
+
+  position: relative;
+  width: $size;
+  height: $size;
+  border: none;
+ 
+  background-color: rgb(209, 0, 0);
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.bin_img {
+  position: absolute;
+  left: calc(50% - $img_size/2);
+  top: calc(50% - $img_size/2);
+  width: $img_size;
+  height: $img_size;
+}

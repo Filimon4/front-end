@@ -12,34 +12,26 @@
 }
 
 .img_loader_subject {
+  padding: 10px;
   $widht_img_loader: 20.5em;
   $height_img_loader: 9.688em;
   position: relative;
+  
   background-color: variables.$background_img_loader;
   height: $height_img_loader;
   width: max($widht_img_loader, 25%);
+  
   border-style: dashed;
   border-color: variables.$border_img_loader_dashed;
   border-width: 1px;
   border-radius: 8px;
+  
   overflow: hidden;
-}
 
-.img_loader_subject::after{
-  $width_inner_circle: 32px;
-  $height_inner_circle: 32px;
-
-  content: '';
-  position: absolute;
-  left: calc(50% - $width_inner_circle/2);
-  top: calc(50% - $height_inner_circle/2);
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  height: $height_inner_circle;
-  width: $width_inner_circle;
-  background-color: variables.$background_inner_circly_loader;
-  border-radius: 40px;
+  gap: 10px;
 }
 
 .img_loader_subject_active {

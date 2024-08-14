@@ -1,18 +1,19 @@
 import React from 'react'
+import cn from "classnames";
 
 import styles from "./PreviewImgEntity.module.scss";
 
 const convertBytesToMb = (bytes: number) => (bytes / 1024 / 1024).toFixed(2)
 
 const PreviewImgEntity = ({
-  key,
-  file
+  file,
+  selected,
 }: {
-  key: number,
-  file: File
+  file: File,
+  selected: boolean,
 }) => {
   return (
-    <div className={styles.subject_grid_unit}>
+    <div className={cn(styles.subject_grid_unit, {[styles.subject_grid_unit_active]: selected == true})}>
       <img src={URL.createObjectURL(file)} className={styles.grid_unit_img}/>
       <div className={styles.grid_unit_panel}>
         <div className={styles.unit_panel_title}>

@@ -12,11 +12,11 @@ const LoginForm = ({
 }) => {
   return (
     <form onSubmit={onSubmit} className={styles.login_form}>
-      {config.map((filed) => (
-        <>
+      {config.map((filed, indx) => (
+        <div className={styles.form_unit} key={indx}>
           <label>{filed.label}</label>
           <input type={filed.input.type} name={filed.input.name} />
-        </>
+        </div>
       ))}
       <button type='submit'>Log in</button>
     </form>

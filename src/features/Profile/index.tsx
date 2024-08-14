@@ -32,6 +32,7 @@ const Profile = () => {
   const navigator = useNavigate()
   const {getCookies, deleteCookies} = useCookies()
   const {data, isError, isFetching, isLoading, isSuccess} = authApi.useGetProfileQuery(getCookies('access_token') ?? '')
+  console.log(data, getCookies('access_token'))
 
   const [openProfOpt, setOpenProfOpt] = useState<boolean>(false)
 

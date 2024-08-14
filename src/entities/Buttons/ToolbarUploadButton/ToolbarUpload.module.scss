@@ -1,0 +1,21 @@
+$size: 32px;
+$size_img: 19px;
+
+.upload_button {
+  cursor: pointer;
+
+  width: $size;
+  height: $size;
+  position: relative;
+  background-color: black;
+  border-radius: 20px;
+}
+
+.upload_button_img {
+  width: $size_img;
+  height: $size_img;
+  position: absolute;
+  left: calc(50% - $size_img/2);
+  top: calc(50% - $size_img/2);
+  
+}

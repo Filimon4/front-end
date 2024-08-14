@@ -12,11 +12,11 @@ const RegistrationForm = ({
 }) => {
   return (
     <form onSubmit={onSubmit} className={styles.login_form}>
-      {config.map((field) => (
-        <>
+      {config.map((field, indx) => (
+        <div className={styles.form_unit} key={indx}>
           <label>{field.label}</label>
           <input type={field.input.type} name={field.input.name}/>
-        </>
+        </div>
       ))}
       <button type='submit'>Registration</button>
     </form>
