@@ -1,19 +1,15 @@
-import React from 'react'
+import React, { memo } from 'react'
 import cn from "classnames";
 
 import styles from "./PreviewImgEntity.module.scss";
 
 const convertBytesToMb = (bytes: number) => (bytes / 1024 / 1024).toFixed(2)
 
-const PreviewImgEntity = ({
-  file,
-  selected,
-}: {
+const PreviewImgEntity = memo(function PreviewImgEntity({ file}: {
   file: File,
-  selected: boolean,
-}) => {
+}) {
   return (
-    <div className={cn(styles.subject_grid_unit, {[styles.subject_grid_unit_active]: selected == true})}>
+    <div className={cn(styles.subject_grid_unit)}>
       <img src={URL.createObjectURL(file)} className={styles.grid_unit_img}/>
       <div className={styles.grid_unit_panel}>
         <div className={styles.unit_panel_title}>
@@ -30,6 +26,6 @@ const PreviewImgEntity = ({
       </div>
     </div>
   )
-}
+})
 
 export default PreviewImgEntity

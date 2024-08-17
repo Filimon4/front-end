@@ -1,4 +1,5 @@
 import React from 'react'
+import cn from 'classnames'
 
 import styles from "./ViewImg.module.scss";
 import PreviewImgEntity from '@entities/PreviewImgEntity';
@@ -24,8 +25,8 @@ const ViewImg = () => {
   return (
     <div className={styles.loader_subject_grid}>
       {loadedImgs.map((file, indx) => (
-        <div key={indx} onClick={e => onSelecteClick(indx)}>
-          <PreviewImgEntity file={file} selected={selectedImgs.includes(indx)} />
+        <div key={indx} onClick={e => onSelecteClick(indx)} className={cn({[styles.subject_grid_unit_active]: selectedImgs.includes(indx)})}>
+          <PreviewImgEntity file={file} />
         </div>
       ))}
     </div>
