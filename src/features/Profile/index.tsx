@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { authApi } from '@shared/lib/queryApi/authApi';
 import useCookies from '@shared/hooks/useCookies';
@@ -30,17 +30,30 @@ const dropDownConfig: TDropUnit[] = [
 // TODO: Сделать номрмальную кновпу signin
 const Profile = () => {
   const navigator = useNavigate()
-  const {getCookies, deleteCookies} = useCookies()
-  const {data, isError, isFetching, isLoading, isSuccess} = authApi.useGetProfileQuery(getCookies('access_token') ?? '')
+  const {getCookies, deleteCookies, addCookies} = useCookies()
+  const {data, isError, isFetching, isLoading, isSuccess, refetch} = authApi.useGetProfileQuery(getCookies('access_token') ?? '')
+  const [refreshPos, {data: dataRefresh, isError: isErrorRefresh, isLoading: isLoadingRefresh, isSuccess: isSuccessRefres}] = authApi.useGetRefreshMutation()
 
   const [openProfOpt, setOpenProfOpt] = useState<boolean>(false)
+
+  useEffect(() => {
+    if (isError) {
+      refreshPos({"refresh": localStorage.getItem('refresh_token')})
+    }
+  }, [isError])
+
+  useEffect(() => {
+    if (dataRefresh && isSuccessRefres) {
+      addCookies('access_token', dataRefresh.access_token, { path: '/'})
+      refetch()
+    }
+  }, [dataRefresh, isSuccessRefres, isErrorRefresh])
 
   const refClck = useClickOutside(() => {
     setOpenProfOpt(false);
   })
 
   const openProfile = (e: React.MouseEvent, id: number) => {
-    console.log(e.target, id);
     setOpenProfOpt(false);
     navigator('/profile')
   }
@@ -49,6 +62,7 @@ const Profile = () => {
     console.log(e.target, id);
     setOpenProfOpt(false);
     deleteCookies('access_token')
+    localStorage.removeItem('refresh_token')
   }
 
   return (

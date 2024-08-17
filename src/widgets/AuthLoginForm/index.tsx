@@ -44,7 +44,8 @@ const AuthLoginForm = () => {
 
   useEffect(() => {
     if (!isUninitialized && isSuccess && data) {
-      addCookies('access_token', data.access_token, {path: ''})
+      localStorage.setItem('refresh_token', data.refresh_token)
+      addCookies('access_token', data.access_token, {path: '/'})
       navtigator('/app');
     }
   }, [isUninitialized, isSuccess, data])
@@ -52,7 +53,7 @@ const AuthLoginForm = () => {
   const onSubmitAuth = (e: React.FormEvent) => {
     e.preventDefault()
     const {username, password} = e.target as LoginTarget
-    if (!isLoading && !isSuccess) {
+    if (!isLoading) {
       loginPost({username: username.value, password: password.value})
     }
   }

@@ -24,14 +24,17 @@ export const authApi = createApi({
         },
       })
     }),
-    getRefresh: builder.query({
-      query: (token: string) => ({
-        url: '/refresh',
-        methos: "GET",
-        body: {
-          accesstoken: token
+    getRefresh: builder.mutation({
+      query: (data) => {
+        return {
+          url: '/refresh',
+          method: "post",
+          headers: {
+            "Content-type": "application/json; charset=UTF-8",
+          },
+          body: data
         }
-      })
+      }
     }),
     getProfile: builder.query({
       query: (token: string) => ({
@@ -48,6 +51,6 @@ export const authApi = createApi({
 export default {
   useSetLoginMutation: authApi.useSetLoginMutation,
   useSetRegistrationMutation: authApi.useSetRegistrationMutation,
-  useGetRefreshQuery: authApi.useGetRefreshQuery,
+  useGetRefreshMutation: authApi.useGetRefreshMutation,
   useGetProfileQuery: authApi.useGetProfileQuery,
 } = authApi
